@@ -20,7 +20,8 @@ Development is done on most recent macOS and you are expected to have a apple de
 ```bash
 git submodule update --init
 ```
-* Edit the `BuildConfig/Identity.xcconfig` with your team ID, Product Name and CFBundleIdentifier base. You can use `security find-identity -v` to find out your Team ID.
+* Edit the `BuildConfig/Identity.xcconfig` with your team ID, Product Name and CFBundleIdentifier base. Your Team ID is shown under Membership details at [developer.apple.com/account](https://developer.apple.com/account).
+* Xcode's Signing & Capabilities tab may write a `DEVELOPMENT_TEAM` into the project files. Don't commit that: the team should only come from `Identity.xcconfig`.
 * [optional] tell git to ignore those changes to get out of your way by `git update-index --skip-worktree BuildConfig/Identity.xcconfig`
 
 You should be all set to open up the shared workspace at `SubEthaEdit.xcworkspace` and build the app.

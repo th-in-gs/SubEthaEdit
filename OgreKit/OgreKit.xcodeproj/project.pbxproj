@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		4D82DCCA09B9ECD1007F03B0 /* Oniguruma */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 4D82DCD509B9ECF8007F03B0 /* Build configuration list for PBXAggregateTarget "Oniguruma" */;
+			buildPhases = (
+				F2E0B10C2F9A4D3100C0FFEE /* Build Onigmo */,
+			);
+			dependencies = (
+			);
+			name = Oniguruma;
+			productName = Oniguruma;
+		};
 		4DC412B3091519A60029A2A6 /* All */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 4DC412C2091519D50029A2A6 /* Build configuration list for PBXAggregateTarget "All" */;
@@ -77,7 +88,6 @@
 		4DF530D30915226200475575 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 4DF530D00915226200475575 /* MainMenu.nib */; };
 		F250EAC9216A161F00B94A0B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F250EAC8216A161F00B94A0B /* Cocoa.framework */; };
 		F2D5D2E62EAD345E00D0BD57 /* onigmo.h in Headers */ = {isa = PBXBuildFile; fileRef = F2D5D2E52EAD345E00D0BD57 /* onigmo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F2D5D2E72EAD346800D0BD57 /* onigmo.h in Sources */ = {isa = PBXBuildFile; fileRef = F2D5D2E52EAD345E00D0BD57 /* onigmo.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -381,7 +391,7 @@
 		F250EAB4216A05B800B94A0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Base; path = MyFindPanelExample/Base.lproj/MyFindPanel.nib; sourceTree = "<group>"; };
 		F250EAB7216A0CB200B94A0B /* OgreKitBase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = OgreKitBase.xcconfig; path = BuildConfig/OgreKitBase.xcconfig; sourceTree = "<group>"; };
 		F250EAC8216A161F00B94A0B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		F2D5D2E52EAD345E00D0BD57 /* onigmo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = onigmo.h; path = RegularExpression/onigmo.h; sourceTree = SOURCE_ROOT; };
+		F2D5D2E52EAD345E00D0BD57 /* onigmo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = onigmo.h; path = Onigmo/onigmo.h; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1077,23 +1087,6 @@
 		};
 /* End PBXHeadersBuildPhase section */
 
-/* Begin PBXLegacyTarget section */
-		4D82DCCA09B9ECD1007F03B0 /* Oniguruma */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "$(ACTION)";
-			buildConfigurationList = 4D82DCD509B9ECF8007F03B0 /* Build configuration list for PBXLegacyTarget "Oniguruma" */;
-			buildPhases = (
-			);
-			buildToolPath = /usr/bin/make;
-			buildWorkingDirectory = RegularExpression/oniguruma;
-			dependencies = (
-			);
-			name = Oniguruma;
-			passBuildSettingsInEnvironment = 1;
-			productName = Oniguruma;
-		};
-/* End PBXLegacyTarget section */
-
 /* Begin PBXNativeTarget section */
 		4DC40BF209150BDB0029A2A6 /* OgreKit (without Find Panel) */ = {
 			isa = PBXNativeTarget;
@@ -1212,12 +1205,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F2E0B10C2F9A4D3100C0FFEE /* Build Onigmo */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Onigmo";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/Onigmo/onigmo.h",
+				"$(BUILT_PRODUCTS_DIR)/libonigmo.a",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\ncd \"${SRCROOT}/RegularExpression/oniguruma\"\n/usr/bin/make\n\n# Publish the header outside make's own x86_64/ and arm64/ directories. Declaring an output\n# makes Xcode create its parent directory up front, and the Makefile treats an existing\n# x86_64/ or arm64/ as already unpacked. Only copy when it changed, so OgreKit doesn't\n# re-copy the header on every build.\nmkdir -p \"${BUILT_PRODUCTS_DIR}/Onigmo\"\ncmp -s \"${BUILT_PRODUCTS_DIR}/x86_64/onigmo.h\" \"${BUILT_PRODUCTS_DIR}/Onigmo/onigmo.h\" || cp \"${BUILT_PRODUCTS_DIR}/x86_64/onigmo.h\" \"${BUILT_PRODUCTS_DIR}/Onigmo/onigmo.h\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4DC40BF509150BDB0029A2A6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2D5D2E72EAD346800D0BD57 /* onigmo.h in Sources */,
 				4DC40F5009150CF50029A2A6 /* OGRegularExpression.m in Sources */,
 				4DC40F5209150CF50029A2A6 /* OGRegularExpressionPrivate.m in Sources */,
 				4DC40F5409150CF50029A2A6 /* OGRegularExpressionEnumerator.m in Sources */,
@@ -1960,7 +1976,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4D82DCD509B9ECF8007F03B0 /* Build configuration list for PBXLegacyTarget "Oniguruma" */ = {
+		4D82DCD509B9ECF8007F03B0 /* Build configuration list for PBXAggregateTarget "Oniguruma" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4D82DCD609B9ECF8007F03B0 /* Debug */,
